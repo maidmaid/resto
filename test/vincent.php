@@ -1,3 +1,3 @@
 <?php
 
-var_dump('0xdee' == '0ftg');
+var_dump('2ftg' == '2fg');
