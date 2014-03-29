@@ -2,9 +2,8 @@
 
 function a()
 {
-	return 'a';
+	return 'ahah';
 }
-
 
 function comparer($a, $b) {
 
