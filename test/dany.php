@@ -2,7 +2,7 @@
 
 function a()
 {
-	return 'git c cool';
+	return 'babahjj';
 }
 
 function comparer($a, $b) {
