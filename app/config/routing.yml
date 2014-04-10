@@ -1,0 +1,4 @@
+mnu_main:
+    resource: "@MnuMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
