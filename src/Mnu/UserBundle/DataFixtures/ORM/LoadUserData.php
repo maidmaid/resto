@@ -21,19 +21,28 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
      */
     public function load(ObjectManager $manager)
     {
-	/* @var $userManager \FOS\UserBundle\Doctrine\UserManager */
-        //$userManager = $this->container->get('fos_user.user_manager');
+	// Crée une série de User aléatoire
+	for ($i = 0; $i < 100; $i++)
+	{
+	    $user = $this->createUser($i, 'Resto' . $i, 'resto'.$i.'@gmail.com', 'restopass' . $i);
+	    $manager->persist($user);
+	}
 	
-	$user = new User();
-	
-	$user->setUsername('Dany');
-	$user->setEmail('danymaillard93b@gmail.com');
-	$user->setPassword('danypass');
-	
+	// Crée des utilisateurs spécifiques
+	$user = $this->createUser(++$i, 'Dany', 'danymaillard93b@gmail.com', 'danypass');
 	$manager->persist($user);
+	$user = $this->createUser(++$i, 'Vincent', 'vincent.huck.pro@gmail.com', 'vincentpass');
+	$manager->persist($user);
+	$user = $this->createUser(++$i, 'Thierry', 'crettolthierry@ringtarget.com', 'thierrypass');
+	$manager->persist($user);
+	
+	// Autorise l'assignation manuelle de l'ID
+	$metadata = $manager->getClassMetadata(get_class($user));
+	$metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+	
 	$manager->flush();
     }
-
+    
     /**
      * {@inheritDoc}
      */
@@ -48,5 +57,30 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
     public function getOrder()
     {
 	return 1;
+    }
+    
+    /**
+     * Crée un utilisateur
+     * @param string $username
+     * @param string $email
+     * @param string $password
+     * @return \Mnu\UserBundle\Entity\User
+     */
+    public function createUser($id, $username, $email, $password)
+    {
+	$user = new User();
+	$user->setId($id);
+	$user->setUsername($username);
+	$user->setEmail($email);
+	$user->setEnabled(true);
+	
+	// Encode le mot de passe
+	/* @var $encoderFactory \Symfony\Component\Security\Core\Encoder\EncoderFactory */
+	$encoderFactory = $this->container->get('security.encoder_factory');
+	$encoder = $encoderFactory->getEncoder($user);
+	$passwordEncoded = $encoder->encodePassword($password, $user->getSalt());
+	$user->setPassword($passwordEncoded);
+	
+	return $user;
     }
 }
