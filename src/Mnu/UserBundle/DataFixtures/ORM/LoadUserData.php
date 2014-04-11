@@ -22,23 +22,23 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
     public function load(ObjectManager $manager)
     {
 	// Crée une série de User aléatoire
-	for ($i = 0; $i < 100; $i++)
+	for ($i = 1; $i <= 100; $i++)
 	{
 	    $user = $this->createUser($i, 'Resto' . $i, 'resto'.$i.'@gmail.com', 'restopass' . $i);
 	    $manager->persist($user);
 	}
 	
 	// Crée des utilisateurs spécifiques
-	$user = $this->createUser(++$i, 'Dany', 'danymaillard93b@gmail.com', 'danypass');
+	$user = $this->createUser($i++, 'Dany', 'danymaillard93b@gmail.com', 'danypass');
 	$manager->persist($user);
-	$user = $this->createUser(++$i, 'Vincent', 'vincent.huck.pro@gmail.com', 'vincentpass');
+	$user = $this->createUser($i++, 'Vincent', 'vincent.huck.pro@gmail.com', 'vincentpass');
 	$manager->persist($user);
-	$user = $this->createUser(++$i, 'Thierry', 'crettolthierry@ringtarget.com', 'thierrypass');
+	$user = $this->createUser($i++, 'Thierry', 'crettolthierry@ringtarget.com', 'thierrypass');
 	$manager->persist($user);
 	
 	// Autorise l'assignation manuelle de l'ID
 	$metadata = $manager->getClassMetadata(get_class($user));
-	$metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+	$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_CUSTOM);
 	
 	$manager->flush();
     }
