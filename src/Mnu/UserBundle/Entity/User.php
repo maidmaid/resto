@@ -24,6 +24,12 @@ class User extends BaseUser
     protected $id;
     
     /**
+     * @var type 
+     * @ORM\OneToOne(targetEntity="Mnu\MainBundle\Entity\Restaurant", cascade={"persist"})
+     */
+    private $restaurant;
+    
+    /**
      * Set id
      *
      * @param integer $id
@@ -34,5 +40,38 @@ class User extends BaseUser
 	$this->id = $id;
 	
 	return this;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param \Mnu\MainBundle\Entity\Restaurant $restaurant
+     * @return User
+     */
+    public function setRestaurant(\Mnu\MainBundle\Entity\Restaurant $restaurant = null)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return \Mnu\MainBundle\Entity\Restaurant 
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
     }
 }
