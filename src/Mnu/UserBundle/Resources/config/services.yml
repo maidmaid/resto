@@ -1,0 +1,7 @@
+parameters:
+#    mnu_user.example.class: Mnu\UserBundle\Example
+
+services:
+#    mnu_user.example:
+#        class: %mnu_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

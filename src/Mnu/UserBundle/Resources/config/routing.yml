@@ -1,10 +1,6 @@
-mnu_main:
-    resource: "@MnuMainBundle/Resources/config/routing.yml"
-    prefix:   /
-
-mnu_user:
-    resource: "@MnuUserBundle/Resources/config/routing.yml"
-    prefix:   /
+mnu_user_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: MnuUserBundle:Default:index }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
