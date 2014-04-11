@@ -61,6 +61,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
     
     /**
      * Crée un utilisateur
+     * @param int $id
      * @param string $username
      * @param string $email
      * @param string $password
