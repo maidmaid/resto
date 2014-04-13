@@ -21,11 +21,21 @@ class LoadRestaurantData implements FixtureInterface, ContainerAwareInterface, O
      */
     public function load(ObjectManager $manager)
     {
-	// Crée une série de User aléatoire
-	for ($i = 1; $i <= 100; $i++)
+	$data = split(PHP_EOL, file_get_contents(dirname(__FILE__) . '/restaurant.txt'));
+	
+	/* @var $repository \Mnu\UserBundle\Entity\UserRepository */
+	$repository = $this->container->get('doctrine')->getRepository('MnuUserBundle:User');
+	/* @var $users \Mnu\UserBundle\Entity\User[] */
+	$users = $repository->findAll();
+	
+	foreach($users as $key => $user)
 	{
-	    $restaurant = $this->createRestaurant($i, 'Restaurant ' . $i);
-	    $manager->persist($restaurant);
+	    $restaurant = new Restaurant();
+	    $restaurant->setId($key + 1);
+	    $restaurant->setName($data[$key]);
+
+	    $user->setRestaurant($restaurant);
+	    $manager->persist($user);
 	}
 	
 	// Autorise l'assignation manuelle de l'ID
@@ -49,14 +59,5 @@ class LoadRestaurantData implements FixtureInterface, ContainerAwareInterface, O
     public function getOrder()
     {
 	return 2;
-    }
-    
-    public function createRestaurant($id, $name)
-    {
-	$restaurant = new Restaurant();
-	$restaurant->setId($id);
-	$restaurant->setName($name);
-
-	return $restaurant;
     }
 }

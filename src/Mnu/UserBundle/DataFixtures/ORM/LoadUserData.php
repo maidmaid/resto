@@ -21,19 +21,21 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
      */
     public function load(ObjectManager $manager)
     {
-	// Crée une série de User aléatoire
-	for ($i = 1; $i <= 100; $i++)
+	$data = split(PHP_EOL, file_get_contents(dirname(__FILE__) . '/user.txt'));
+	
+	foreach ($data as $i => $username)
 	{
-	    $user = $this->createUser($i, 'Resto' . $i, 'resto'.$i.'@gmail.com', 'restopass' . $i);
+	    $user = $this->createUser($i + 1, $username, $username.'@gmail.com', $username.'pass');
 	    $manager->persist($user);
 	}
 	
 	// Crée des utilisateurs spécifiques
-	$user = $this->createUser($i++, 'Dany', 'danymaillard93b@gmail.com', 'danypass');
+	$i++;
+	$user = $this->createUser(++$i, 'Dany', 'danymaillard93b@gmail.com', 'danypass');
 	$manager->persist($user);
-	$user = $this->createUser($i++, 'Vincent', 'vincent.huck.pro@gmail.com', 'vincentpass');
+	$user = $this->createUser(++$i, 'Vincent', 'vincent.huck.pro@gmail.com', 'vincentpass');
 	$manager->persist($user);
-	$user = $this->createUser($i++, 'Thierry', 'crettolthierry@ringtarget.com', 'thierrypass');
+	$user = $this->createUser(++$i, 'Thierry', 'crettolthierry@ringtarget.com', 'thierrypass');
 	$manager->persist($user);
 	
 	// Autorise l'assignation manuelle de l'ID
@@ -65,7 +67,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
      * @param string $username
      * @param string $email
      * @param string $password
-     * @return \Mnu\UserBundle\Entity\User
+     * @return User
      */
     public function createUser($id, $username, $email, $password)
     {

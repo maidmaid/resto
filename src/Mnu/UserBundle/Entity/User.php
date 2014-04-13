@@ -39,7 +39,7 @@ class User extends BaseUser
     {
 	$this->id = $id;
 	
-	return this;
+	return $this;
     }
 
     /**
