@@ -3,11 +3,13 @@
 namespace Mnu\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Mnu\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Mnu\UserBundle\Entity\User;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class LoadUserData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -40,7 +42,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
 	
 	// Autorise l'assignation manuelle de l'ID
 	$metadata = $manager->getClassMetadata(get_class($user));
-	$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_CUSTOM);
+	$metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_CUSTOM);
 	
 	$manager->flush();
     }
@@ -78,7 +80,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface, Ordered
 	$user->setEnabled(true);
 	
 	// Encode le mot de passe
-	/* @var $encoderFactory \Symfony\Component\Security\Core\Encoder\EncoderFactory */
+	/* @var $encoderFactory EncoderFactory */
 	$encoderFactory = $this->container->get('security.encoder_factory');
 	$encoder = $encoderFactory->getEncoder($user);
 	$passwordEncoded = $encoder->encodePassword($password, $user->getSalt());

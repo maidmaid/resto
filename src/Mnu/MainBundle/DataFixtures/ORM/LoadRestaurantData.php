@@ -3,11 +3,14 @@
 namespace Mnu\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Mnu\MainBundle\Entity\Restaurant;
+use Mnu\UserBundle\Entity\User;
+use Mnu\UserBundle\Entity\UserRepository;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Mnu\MainBundle\Entity\Restaurant;
 
 class LoadRestaurantData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -23,9 +26,9 @@ class LoadRestaurantData implements FixtureInterface, ContainerAwareInterface, O
     {
 	$data = split(PHP_EOL, file_get_contents(dirname(__FILE__) . '/restaurant.txt'));
 	
-	/* @var $repository \Mnu\UserBundle\Entity\UserRepository */
+	/* @var $repository UserRepository */
 	$repository = $this->container->get('doctrine')->getRepository('MnuUserBundle:User');
-	/* @var $users \Mnu\UserBundle\Entity\User[] */
+	/* @var $users User[] */
 	$users = $repository->findAll();
 	
 	foreach($users as $key => $user)
@@ -40,7 +43,7 @@ class LoadRestaurantData implements FixtureInterface, ContainerAwareInterface, O
 	
 	// Autorise l'assignation manuelle de l'ID
 	$metadata = $manager->getClassMetadata(get_class($restaurant));
-	$metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_CUSTOM);
+	$metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_CUSTOM);
 	
 	$manager->flush();
     }
