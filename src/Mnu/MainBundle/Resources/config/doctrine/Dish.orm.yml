@@ -1,0 +1,15 @@
+Mnu\MainBundle\Entity\Dish:
+    type: entity
+    table: null
+    repositoryClass: Mnu\MainBundle\Entity\DishRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        entitled:
+            type: string
+            length: '255'
+    lifecycleCallbacks: {  }
