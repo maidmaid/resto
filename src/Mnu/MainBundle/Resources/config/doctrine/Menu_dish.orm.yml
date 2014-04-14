@@ -1,0 +1,21 @@
+Mnu\MainBundle\Entity\Menu_dish:
+    type: entity
+    table: null
+    repositoryClass: Mnu\MainBundle\Entity\Menu_dishRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        idMenu:
+            type: integer
+            column: id_menu
+        idDish:
+            type: integer
+            column: id_dish
+        type:
+            type: string
+            length: '255'
+    lifecycleCallbacks: {  }
