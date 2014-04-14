@@ -12,3 +12,7 @@ parameters:
     locale: en
     secret: e99955fe10bb333df98403c9144d10f5d5
     database_path: null
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Mnu\UserBundle\Entity\User
