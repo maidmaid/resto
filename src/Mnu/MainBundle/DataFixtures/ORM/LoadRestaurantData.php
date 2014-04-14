@@ -1,6 +1,6 @@
 <?php
 
-namespace Mnu\UserBundle\DataFixtures\ORM;
+namespace Mnu\MainBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
