@@ -27,6 +27,19 @@ class MenuDishType
      * @ORM\Column(name="type", type="string", length=50)
      */
     private $type;
+    
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return integer
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+	
+	return $this;
+    }
 
     /**
      * Get id
