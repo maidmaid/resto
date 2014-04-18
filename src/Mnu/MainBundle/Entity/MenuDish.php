@@ -20,15 +20,7 @@ class MenuDish
      * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\Dish")
      */
     private $dish;
-    
-    /**
-     * @var enum
-     *
-     * @ORM\Column(name="$type", type="string", columnDefinition="enum('Entrée', 'Plat principal', 'Dessert')")
-     */
-    private $type;
-    
-
+  
     /**
      * Set Menu
      *
@@ -67,26 +59,5 @@ class MenuDish
     public function getDish()
     {
         return $this->dish;
-    }
-    
-    /**
-     * Set type
-     *
-     * @param enum $type
-     * @return MenuDish
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-    
-    /**
-     * Get type
-     *
-     * @return enum 
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 }
