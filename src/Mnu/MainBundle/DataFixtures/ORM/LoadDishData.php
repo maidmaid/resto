@@ -1,12 +1,13 @@
 <?php
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Mnu\MainBundle\Entity\Dish;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Mnu\MainBundle\Entity\Dish;
 
 
-class LoadDishData implements FixtureInterface 
+class LoadDishData implements FixtureInterface, OrderedFixtureInterface
 {
     
     /**
@@ -29,5 +30,13 @@ class LoadDishData implements FixtureInterface
 	$metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_CUSTOM);
 	
         $manager->flush();    
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder() 
+    {
+        return 5;
     }
 }
