@@ -29,7 +29,7 @@ class Dish
     private $entitled;
 
     
-     /**
+    /**
      * Set id
      *
      * @param integer $id
