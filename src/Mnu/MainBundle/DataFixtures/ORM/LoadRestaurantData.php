@@ -38,9 +38,9 @@ class LoadRestaurantData implements FixtureInterface, ContainerAwareInterface, O
 	    $restaurant->setName($data[$key]);
 
 	    $user->setRestaurant($restaurant);
-	    $manager->persist($user);
+	    $manager->persist($user);    
 	}
-	
+        
 	// Autorise l'assignation manuelle de l'ID
 	$metadata = $manager->getClassMetadata(get_class($restaurant));
 	$metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_CUSTOM);
