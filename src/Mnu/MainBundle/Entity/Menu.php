@@ -30,7 +30,7 @@ class Menu
     /**
      * @var string
      *
-     * @ORM\Column(name="entitled", type="string", length=60)
+     * @ORM\Column(name="entitled", type="string", length=60, nullable=true)
      */
     private $entitled;
 
