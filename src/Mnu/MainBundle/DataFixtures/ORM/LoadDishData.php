@@ -19,7 +19,7 @@ class LoadDishData implements FixtureInterface
         foreach($data as $key => $dishData) 
         {
             $dish = new Dish();
-            $dish->setId($key);
+            $dish->setId($key + 1);
             $dish->setEntitled($dishData);
             $manager->persist($dish);
         }
