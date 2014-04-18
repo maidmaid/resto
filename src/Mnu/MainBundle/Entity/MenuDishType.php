@@ -11,13 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Mnu\MainBundle\Entity\MenuDishTypeRepository")
  */
 class MenuDishType
-{
-    /**
-     * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\MenuDish")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $menuDish;
-    
+{  
     /**
      * @var integer
      *
@@ -33,26 +27,6 @@ class MenuDishType
      * @ORM\Column(name="type", type="string", length=50)
      */
     private $type;
-    
-    /**
-     * Set menuDish
-     *
-     * @param Mnu\MainBundle\Entity\MenuDish $menuDish
-     */
-    public function setMenuDish(\Mnu\MainBundle\Entity\MenuDish $menuDish)
-    {
-        $this->menuDish = $menuDish;
-    }
-
-   /**
-    * Get menuDish
-    *
-    * @return Mnu\MainBundle\Entity\MenuDish 
-    */
-   public function getMenuDish()
-   {
-     return $this->menuDish;
-   }
 
     /**
      * Get id
