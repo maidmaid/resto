@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('MnuMainBundle:Default:index.html.twig');
     }
+    
+    public function adminAction()
+    {
+        return $this->render('MnuMainBundle:Admin:index.html.twig');
+    }
 }
