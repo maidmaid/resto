@@ -13,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Menu
 {
     /**
+     * @ORM\OneToOne(targetEntity="Mnu\MainBundle\Entity\Restaurant", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $restaurant;
+  
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -41,6 +47,22 @@ class Menu
      * @ORM\Column(name="image", type="string", length=45)
      */
     private $image;
+    
+    /**
+     * @param Mnu\MainBundle\Entity\Restaurant $restaurant
+     */
+    public function setRestaurant(\Mnu\MainBundle\Entity\Restaurant $restaurant)
+    {
+        $this->restaurant = $restaurant;
+    }
+   
+    /**
+     * @return Mnu\MainBundle\Entity\Restaurant 
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
 
 
     /**
