@@ -6,15 +6,18 @@ use Mnu\MainBundle\Entity\Dish;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 
-class LoadDishData implements FixtureInterface {
+class LoadDishData implements FixtureInterface 
+{
     
     /**
      * {@inheritDoc}
      */
-    public function load(ObjectManager $manager) {        
+    public function load(ObjectManager $manager) 
+    {        
         $data = split(PHP_EOL, file_get_contents(dirname(__FILE__) . '/dish.txt'));
         
-        foreach($data as $key => $dishData) {
+        foreach($data as $key => $dishData) 
+        {
             $dish = new Dish();
             $dish->setId($key);
             $dish->setEntitled($dishData);
