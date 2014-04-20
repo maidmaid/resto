@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="menu_dish")
  */
 class MenuDish
 {
@@ -24,8 +25,9 @@ class MenuDish
     /**
      * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\MenuDishType")
      * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="menu_dish_type_id")
      */
-    private $menuDishType;
+    private $type;
   
     /**
      * Set Menu
@@ -66,24 +68,27 @@ class MenuDish
     {
         return $this->dish;
     }
-    
+
     /**
-     * Set menuDishType
+     * Set type
      *
-     * @param Mnu\MainBundle\Entity\MenuDishType $menuDishType
+     * @param \Mnu\MainBundle\Entity\MenuDishType $type
+     * @return MenuDish
      */
-    public function setMenuDish(\Mnu\MainBundle\Entity\MenuDish $menuDishType)
+    public function setType(\Mnu\MainBundle\Entity\MenuDishType $type)
     {
-        $this->menuDishType = $menuDishType;
+        $this->type = $type;
+
+        return $this;
     }
 
     /**
-     * Get menuDishType
+     * Get type
      *
-     * @return Mnu\MainBundle\Entity\MenuDishType 
+     * @return \Mnu\MainBundle\Entity\MenuDishType 
      */
-    public function getMenuDishType()
+    public function getType()
     {
-        return $this->menuDishType;
+        return $this->type;
     }
 }
