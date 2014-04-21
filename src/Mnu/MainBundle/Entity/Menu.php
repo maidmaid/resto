@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Menu
 {
     /**
-     * @ORM\OneToOne(targetEntity="Mnu\MainBundle\Entity\Restaurant", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\Restaurant", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $restaurant;
