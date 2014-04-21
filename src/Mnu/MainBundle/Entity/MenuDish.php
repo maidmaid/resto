@@ -25,9 +25,8 @@ class MenuDish
     /**
      * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\MenuDishType")
      * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(name="menu_dish_type_id")
      */
-    private $type;
+    private $menuDishType;
   
     /**
      * Set Menu
@@ -75,9 +74,9 @@ class MenuDish
      * @param \Mnu\MainBundle\Entity\MenuDishType $type
      * @return MenuDish
      */
-    public function setType(\Mnu\MainBundle\Entity\MenuDishType $type)
+    public function setMenuDishType(\Mnu\MainBundle\Entity\MenuDishType $menuDishType)
     {
-        $this->type = $type;
+        $this->menuDishType = $menuDishType;
 
         return $this;
     }
@@ -87,8 +86,8 @@ class MenuDish
      *
      * @return \Mnu\MainBundle\Entity\MenuDishType 
      */
-    public function getType()
+    public function getMenuDishType()
     {
-        return $this->type;
+        return $this->menuDishType;
     }
 }
