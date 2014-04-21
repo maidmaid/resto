@@ -30,23 +30,27 @@ class LoadMenuData implements FixtureInterface, ContainerAwareInterface, Ordered
         /* @var $users Restaurant[] */
 	$restaurants = $repository->findAll();
 	
+        $primaryKey = 1;
 	foreach($restaurants as $key => $restaurant)
 	{
             // génération de 1 à 5 menus max par restaurant
             foreach (range(1, rand(1,5)) as $number) {
                 $menu = new Menu();
                 $menu->setEntitled('Menu N° '.$number)
+                        ->setId($primaryKey)
                         ->setImage('image'.$number.'.jpg')
                         ->setPrice(mt_rand (15*10, 100*10) / 10) // définit le prix d'un menu entre CHF 15 et CHF 100 avec décimales
                         ->setRestaurant($restaurant);
 
                 $manager->persist($menu);  
+                
+                $primaryKey++;
             }   
+            
+            // Autorise l'assignation manuelle de l'ID
+            $metadata = $manager->getClassMetadata(get_class($menu));
+            $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_CUSTOM);
 	}
-        
-	// Autorise l'assignation manuelle de l'ID
-	$metadata = $manager->getClassMetadata(get_class($menu));
-	$metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_CUSTOM);
 	
 	$manager->flush();
     }
