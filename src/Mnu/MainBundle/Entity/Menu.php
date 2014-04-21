@@ -64,7 +64,19 @@ class Menu
         return $this->restaurant;
     }
 
-
+    /**
+     * Set id
+     *
+     * @param integer $id
+     * @return integer
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+	
+	return $this;
+    }
+    
     /**
      * Get id
      *
