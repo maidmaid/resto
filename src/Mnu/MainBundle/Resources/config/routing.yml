@@ -1,7 +1,7 @@
 mnu_main_homepage:
     pattern:  /
-    defaults: { _controller: MnuMainBundle:Default:index }
+    defaults: { _controller: MnuMainBundle:Main:index }
 
 mnu_main_adminpage:
     pattern:  /admin
-    defaults: { _controller: MnuMainBundle:Default:admin }
+    defaults: { _controller: MnuMainBundle:Main:admin }
