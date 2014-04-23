@@ -1,6 +1,22 @@
 {% extends '::base.html.twig' %}
+
 {% block body %}
     <div class="container">
-    {{ form(form) }}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Paramètres de base</div>
+                <div class="panel-body">
+                    {{ form(userForm) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Paramètres du restaurant</div>
+                <div class="panel-body">
+                    {{ form(restaurantForm) }}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

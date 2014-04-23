@@ -5,3 +5,11 @@ mnu_main_homepage:
 mnu_main_adminpage:
     pattern:  /admin
     defaults: { _controller: MnuMainBundle:Main:admin }
+    
+mnu_main_admin_update_user:
+    pattern:  /admin/update/user
+    defaults: { _controller: MnuMainBundle:Main:updateUser }
+    
+mnu_main_admin_update_restaurant:
+    pattern:  /admin/update/restaurant
+    defaults: { _controller: MnuMainBundle:Main:updateRestaurant }
