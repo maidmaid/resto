@@ -12,7 +12,7 @@ class MenuDish
 {
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\Menu")
+     * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\Menu", inversedBy="menuDishes")
      */
     private $menu;
     

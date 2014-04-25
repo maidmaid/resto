@@ -1,4 +1,4 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-    <h1>Coucou</h1>
+    {{ include('MnuMainBundle:Default:menus.html.twig', {'menus': menus}) }}
 {% endblock %}

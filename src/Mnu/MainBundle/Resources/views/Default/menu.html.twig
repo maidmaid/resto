@@ -1,0 +1,26 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="panel-title">{{ menu.entitled }}</div>
+        <div>
+            <span>par</span>
+            <span>{{ menu.restaurant.name }}</span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div>
+            <img src="{{ asset('img/menu/' ~ menu.image) }}" class="img-responsive img-rounded">
+        </div>
+        <br/>
+        <ul class="list-group">
+        {% for menuDish in menu.menuDishes %}
+            <li class="list-group-item">
+                <span class="label label-info">{{ menuDish.menuDishType.type }}</span>
+                <span>{{ menuDish.dish.entitled }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="panel-footer">
+        <span class="label label-primary">{{ menu.price }}.-</span>
+    </div>
+</div>

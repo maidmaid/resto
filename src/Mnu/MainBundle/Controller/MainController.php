@@ -12,7 +12,14 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('MnuMainBundle:Default:index.html.twig');
+	/* @var $repository \Mnu\MainBundle\Entity\MenuRepository */
+	$repository = $this->getDoctrine()->getManager()->getRepository('MnuMainBundle:Menu');
+	/* @var $menus \Mnu\MainBundle\Entity\Menu[] */
+	$menus = $repository->findBy(array(), null, 20);
+	
+        return $this->render('MnuMainBundle:Default:index.html.twig', array(
+	    'menus' => $menus
+	));
     }
     
     public function adminAction(Request $request)

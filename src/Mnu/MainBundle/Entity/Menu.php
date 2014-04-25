@@ -49,6 +49,12 @@ class Menu
     private $image;
     
     /**
+     *
+     * @ORM\OneToMany(targetEntity="Mnu\MainBundle\Entity\MenuDish", mappedBy="menu")
+     */
+    private $menuDishes;
+    
+    /**
      * @param Mnu\MainBundle\Entity\Restaurant $restaurant
      */
     public function setRestaurant(\Mnu\MainBundle\Entity\Restaurant $restaurant)
@@ -154,5 +160,46 @@ class Menu
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Get menuDishes
+     *
+     * @return \Mnu\MainBundle\Entity\MenuDish 
+     */
+    public function getMenuDishes()
+    {
+        return $this->menuDishes;
+    }
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->menuDishes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add menuDishes
+     *
+     * @param \Mnu\MainBundle\Entity\MenuDish $menuDishes
+     * @return Menu
+     */
+    public function addMenuDish(\Mnu\MainBundle\Entity\MenuDish $menuDishes)
+    {
+        $this->menuDishes[] = $menuDishes;
+
+        return $this;
+    }
+
+    /**
+     * Remove menuDishes
+     *
+     * @param \Mnu\MainBundle\Entity\MenuDish $menuDishes
+     */
+    public function removeMenuDish(\Mnu\MainBundle\Entity\MenuDish $menuDishes)
+    {
+        $this->menuDishes->removeElement($menuDishes);
     }
 }
