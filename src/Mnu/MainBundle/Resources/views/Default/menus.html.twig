@@ -1,11 +1,11 @@
 {% for menu in menus %}
-    {% if loop.index % 4 == 0 %}
+    {% if loop.index % 6 == 0 %}
         <div class="row">
     {% endif %}
-    <div class="menu col-md-3">
+    <div class="menu col-md-2">
         {{ include('MnuMainBundle:Default:menu.html.twig', {'menu': menu}) }}
     </div>
-    {% if loop.index % 4 == 0 %}
+    {% if loop.index % 6 == 0 %}
         </div>
     {% endif %}   
 {% endfor %}

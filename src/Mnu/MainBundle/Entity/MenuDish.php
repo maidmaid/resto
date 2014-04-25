@@ -23,6 +23,7 @@ class MenuDish
     private $dish;
     
     /**
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\MenuDishType")
      * @ORM\JoinColumn(nullable=false)
      */

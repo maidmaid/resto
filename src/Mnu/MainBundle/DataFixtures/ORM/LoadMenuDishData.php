@@ -41,12 +41,17 @@ class LoadMenuDishData implements FixtureInterface, ContainerAwareInterface, Ord
         
 	foreach($menus as $key => $menu)
 	{
-            $menuDish = new MenuDish();
-            $menuDish->setMenu($menu);
-            $menuDish->setDish($dishes[array_rand($dishes)]);
-            $menuDish->setMenuDishType($menuDishTypes[array_rand($menuDishTypes)]);
-            
-            $manager->persist($menuDish);
+	    $randMenuDishTypes = array_rand($menuDishTypes, rand(2, count($menuDishTypes) - 1));
+
+	    for ($i = 0; $i < count($randMenuDishTypes); $i++)
+	    {
+		$menuDish = new MenuDish();
+		$menuDish->setMenu($menu);
+		$menuDish->setDish($dishes[array_rand($dishes)]);
+		$menuDish->setMenuDishType($menuDishTypes[$randMenuDishTypes[$i]]);
+		
+		$manager->persist($menuDish);
+	    }
 	}
        
 	
