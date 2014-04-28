@@ -1,0 +1,8 @@
+#menus {
+    margin: 0 auto;
+    transition: width 1s ease;
+}
+
+#menus .menu {
+    width: 250px;
+}
