@@ -1,5 +1,7 @@
 <?php
 
+namespace Mnu\MainBundle\DataFixtures\ORM;
+
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
