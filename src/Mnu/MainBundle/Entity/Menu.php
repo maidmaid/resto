@@ -50,9 +50,9 @@ class Menu
     
     /**
      *
-     * @ORM\OneToMany(targetEntity="Mnu\MainBundle\Entity\MenuDish", mappedBy="menu")
+     * @ORM\OneToMany(targetEntity="Mnu\MainBundle\Entity\MenuDetail", mappedBy="menu")
      */
-    private $menuDishes;
+    private $details;
     
     /**
      * @param Mnu\MainBundle\Entity\Restaurant $restaurant
@@ -161,45 +161,44 @@ class Menu
     {
         return $this->image;
     }
-
-    /**
-     * Get menuDishes
-     *
-     * @return \Mnu\MainBundle\Entity\MenuDish 
-     */
-    public function getMenuDishes()
-    {
-        return $this->menuDishes;
-    }
-    
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->menuDishes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->details = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add menuDishes
+     * Add details
      *
-     * @param \Mnu\MainBundle\Entity\MenuDish $menuDishes
+     * @param \Mnu\MainBundle\Entity\MenuDetail $details
      * @return Menu
      */
-    public function addMenuDish(\Mnu\MainBundle\Entity\MenuDish $menuDishes)
+    public function addDetail(\Mnu\MainBundle\Entity\MenuDetail $details)
     {
-        $this->menuDishes[] = $menuDishes;
+        $this->details[] = $details;
 
         return $this;
     }
 
     /**
-     * Remove menuDishes
+     * Remove details
      *
-     * @param \Mnu\MainBundle\Entity\MenuDish $menuDishes
+     * @param \Mnu\MainBundle\Entity\MenuDetail $details
      */
-    public function removeMenuDish(\Mnu\MainBundle\Entity\MenuDish $menuDishes)
+    public function removeDetail(\Mnu\MainBundle\Entity\MenuDetail $details)
     {
-        $this->menuDishes->removeElement($menuDishes);
+        $this->details->removeElement($details);
+    }
+
+    /**
+     * Get details
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDetails()
+    {
+        return $this->details;
     }
 }

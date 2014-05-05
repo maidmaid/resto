@@ -6,13 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="menu_dish")
+ * @ORM\Table(name="menu_detail")
  */
-class MenuDish
+class MenuDetail
 {
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\Menu", inversedBy="menuDishes")
+     * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\Menu", inversedBy="details")
      */
     private $menu;
     
