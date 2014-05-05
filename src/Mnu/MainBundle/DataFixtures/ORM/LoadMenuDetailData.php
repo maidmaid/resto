@@ -12,7 +12,7 @@ use Mnu\MainBundle\Entity\MenuDish;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadMenuDishData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadMenuDetailData implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     /**
      * @var ContainerInterface 
@@ -35,22 +35,22 @@ class LoadMenuDishData implements FixtureInterface, ContainerAwareInterface, Ord
 	$dishes = $repositoryDish->findAll();
         
         /* @var $repositoryMenuDishType DishTypeRepository */
-        $repositoryMenuDishType = $this->container->get('doctrine')->getRepository('MnuMainBundle:MenuDishType');
+        $repositoryMenuDetailType = $this->container->get('doctrine')->getRepository('MnuMainBundle:MenuDetailType');
         /* @var $dishTypes Restaurant[] */
-	$menuDishTypes = $repositoryMenuDishType->findAll();
+	$menuDetailTypes = $repositoryMenuDetailType->findAll();
         
 	foreach($menus as $key => $menu)
 	{
-	    $randMenuDishTypes = array_rand($menuDishTypes, rand(2, count($menuDishTypes) - 1));
+	    $randMenuDetailTypes = array_rand($menuDetailTypes, rand(2, count($menuDetailTypes) - 1));
 
-	    for ($i = 0; $i < count($randMenuDishTypes); $i++)
+	    for ($i = 0; $i < count($randMenuDetailTypes); $i++)
 	    {
-		$menuDish = new MenuDish();
-		$menuDish->setMenu($menu);
-		$menuDish->setDish($dishes[array_rand($dishes)]);
-		$menuDish->setMenuDishType($menuDishTypes[$randMenuDishTypes[$i]]);
+		$menuDetail = new \Mnu\MainBundle\Entity\MenuDetail();
+		$menuDetail->setMenu($menu);
+		$menuDetail->setDish($dishes[array_rand($dishes)]);
+		$menuDetail->setType($menuDetailTypes[$randMenuDetailTypes[$i]]);
 		
-		$manager->persist($menuDish);
+		$manager->persist($menuDetail);
 	    }
 	}
        

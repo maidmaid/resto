@@ -4,10 +4,10 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Mnu\MainBundle\Entity\MenuDishType;
+use Mnu\MainBundle\Entity\MenuDetailType;
 
 
-class LoadMenuDishTypeData implements FixtureInterface, OrderedFixtureInterface
+class LoadMenuDetailTypeData implements FixtureInterface, OrderedFixtureInterface
 {
     
     /**
@@ -15,18 +15,18 @@ class LoadMenuDishTypeData implements FixtureInterface, OrderedFixtureInterface
      */
     public function load(ObjectManager $manager) 
     {        
-        $data = split(PHP_EOL, file_get_contents(dirname(__FILE__) . '/menudishtype.txt'));
+        $data = split(PHP_EOL, file_get_contents(dirname(__FILE__) . '/menudetailtype.txt'));
         
-        foreach($data as $key => $menuDishTypeData) 
+        foreach($data as $key => $menuDetailTypeData) 
         {
-            $menuDishType = new MenuDishType();
-            $menuDishType->setId($key + 1);
-            $menuDishType->setType($menuDishTypeData);
-            $manager->persist($menuDishType);
+            $menuDetailType = new MenuDetailType();
+            $menuDetailType->setId($key + 1);
+            $menuDetailType->setName($menuDetailTypeData);
+            $manager->persist($menuDetailType);
         }
         
         // Autorise l'assignation manuelle de l'ID
-	$metadata = $manager->getClassMetadata(get_class($menuDishType));
+	$metadata = $manager->getClassMetadata(get_class($menuDetailType));
 	$metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_CUSTOM);
 	
         $manager->flush();    
