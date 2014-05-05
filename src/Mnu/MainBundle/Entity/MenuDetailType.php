@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * MenuDishType
  *
- * @ORM\Table(name="menu_dish_type")
- * @ORM\Entity(repositoryClass="Mnu\MainBundle\Entity\MenuDishTypeRepository")
+ * @ORM\Table(name="menu_detail_type")
+ * @ORM\Entity(repositoryClass="Mnu\MainBundle\Entity\MenuDetailTypeRepository")
  */
-class MenuDishType
+class MenuDetailType
 {  
     /**
      * @var integer
@@ -26,7 +26,7 @@ class MenuDishType
      *
      * @ORM\Column(name="type", type="string", length=50)
      */
-    private $type;
+    private $name;
     
     /**
      * Set id
@@ -52,25 +52,25 @@ class MenuDishType
     }
 
     /**
-     * Set type
+     * Set name
      *
-     * @param string $type
-     * @return MenuDishType
+     * @param string $name
+     * @return MenuDetailType
      */
-    public function setType($type)
+    public function setName($name)
     {
-        $this->type = $type;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get name
      *
      * @return string 
      */
-    public function getType()
+    public function getName()
     {
-        return $this->type;
+        return $this->name;
     }
 }

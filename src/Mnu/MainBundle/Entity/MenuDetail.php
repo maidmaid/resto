@@ -24,10 +24,10 @@ class MenuDetail
     
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\MenuDishType")
+     * @ORM\ManyToOne(targetEntity="Mnu\MainBundle\Entity\MenuDetailType")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $menuDishType;
+    private $type;
   
     /**
      * Set Menu
@@ -72,12 +72,12 @@ class MenuDetail
     /**
      * Set type
      *
-     * @param \Mnu\MainBundle\Entity\MenuDishType $type
-     * @return MenuDish
+     * @param \Mnu\MainBundle\Entity\MenuDetailType $type
+     * @return MenuDetail
      */
-    public function setMenuDishType(\Mnu\MainBundle\Entity\MenuDishType $menuDishType)
+    public function setType(\Mnu\MainBundle\Entity\MenuDetailType $type)
     {
-        $this->menuDishType = $menuDishType;
+        $this->type = $type;
 
         return $this;
     }
@@ -85,10 +85,10 @@ class MenuDetail
     /**
      * Get type
      *
-     * @return \Mnu\MainBundle\Entity\MenuDishType 
+     * @return \Mnu\MainBundle\Entity\MenuDetailType 
      */
-    public function getMenuDishType()
+    public function getType()
     {
-        return $this->menuDishType;
+        return $this->type;
     }
 }
