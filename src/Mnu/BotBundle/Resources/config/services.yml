@@ -1,0 +1,7 @@
+parameters:
+#    mnu_bot.example.class: Mnu\BotBundle\Example
+
+services:
+#    mnu_bot.example:
+#        class: %mnu_bot.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

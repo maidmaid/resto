@@ -1,3 +1,7 @@
+mnu_bot:
+    resource: "@MnuBotBundle/Resources/config/routing.yml"
+    prefix:   /
+
 mnu_main:
     resource: "@MnuMainBundle/Resources/config/routing.yml"
     prefix:   /
