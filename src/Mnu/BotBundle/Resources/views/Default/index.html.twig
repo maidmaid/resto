@@ -1,6 +1,12 @@
 {% extends '::base.html.twig' %}
 {% block body %}
+    <table class="table">
     {% for restaurant in restaurants %}
-        <p>{{ restaurant }}</p>
+        <tr>
+            <td>{{ restaurant.name }}</td>
+            <td>{{ restaurant.url }}</td>
+            <td>{{ restaurant.url2 }}</td>
+        </tr>
     {% endfor %}    
+    </table>
 {% endblock %}

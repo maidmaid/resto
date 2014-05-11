@@ -48,9 +48,16 @@ class DefaultController extends Controller
             $document->loadHTML($response['output']);
             $xpath = new \DOMXPath($document);
             
-            foreach ($xpath->query(\Symfony\Component\CssSelector\CssSelector::toXPath('tr .V8 b')) as $node)
+            // Données
+            foreach ($xpath->query(\Symfony\Component\CssSelector\CssSelector::toXPath('tr .A9')) as $restaurantNode)
             {
-                $restaurants[] = $node->nodeValue;
+                $restaurant = array();
+                $restaurant['name'] = $name = $restaurantNode->getElementsByTagName('b')->item(0)->nodeValue;
+                $restaurant['url'] = $restaurantNode->getElementsByTagName('a')->item(0)->getAttribute('href');
+                $restaurant['url2'] = $restaurantNode->getElementsByTagName('a')->length == 2 ?
+                        $restaurantNode->getElementsByTagName('a')->item(1)->getAttribute('href') :
+                        '';
+                $restaurants[] = $restaurant;
             }
         }
         
