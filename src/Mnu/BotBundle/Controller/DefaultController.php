@@ -51,7 +51,7 @@ class DefaultController extends Controller
             // Données
             foreach ($xpath->query(\Symfony\Component\CssSelector\CssSelector::toXPath('tr .A9')) as $restaurantNode)
             {
-                // Phone
+                // Number
                 $phoneStr = str_replace(' ', '', $restaurantNode->nodeValue);
                 preg_match('/\d{10}/', $phoneStr, $phone);
                 $number = $phone[0];
@@ -59,37 +59,43 @@ class DefaultController extends Controller
                 // Name
                 $name = $restaurantNode->getElementsByTagName('b')->item(0)->nodeValue;
                 
-                // Url
+                // Urls
                 $url = $restaurantNode->getElementsByTagName('a')->item(0)->getAttribute('href');
                 $url2 = $restaurantNode->getElementsByTagName('a')->length == 2 ?
                         $restaurantNode->getElementsByTagName('a')->item(1)->getAttribute('href') :
                         '';
-                
+
+                // Persistance
                 $em = $this->getDoctrine()->getManager();
                 /* @var $repository \Mnu\BotBundle\Entity\BotRestaurantRepository */
                 $repository = $em->getRepository('MnuBotBundle:BotRestaurant');
                 $botRestaurants = $repository->findByNumber($number);
-                
-                if(empty($botRestaurants))
-                {
-                    $botRestaurant = new \Mnu\BotBundle\Entity\BotRestaurant();
-                }
-                else
-                {
-                    $botRestaurant = $botRestaurants[0];    
-                }
+                $botRestaurant = empty($botRestaurants) ? new \Mnu\BotBundle\Entity\BotRestaurant() : $botRestaurants[0];
                 
                 $botRestaurant->setNumber($number);
                 $botRestaurant->setName($name);
+                
+                $botRestaurantLink1 = new \Mnu\BotBundle\Entity\BotRestaurantLink();
+                $botRestaurantLink1->setUrl($url);
+                $botRestaurantLink1->setBotRestaurant($botRestaurant);
+                $em->persist($botRestaurantLink1);
+                
+                if(!empty($url2))
+                {
+                    $botRestaurantLink2 = new \Mnu\BotBundle\Entity\BotRestaurantLink();
+                    $botRestaurantLink2->setUrl($url2);
+                    $botRestaurantLink2->setBotRestaurant($botRestaurant);
+                    $em->persist($botRestaurantLink2);
+                }
                 
                 $em->persist($botRestaurant);
             }
             
             $em->flush();
         }
-        
+
         return $this->render('MnuBotBundle:Default:index.html.twig', array(
-            'restaurants' => array()
+            'botRestaurants' => $repository->findAll()
         ));
     }
     

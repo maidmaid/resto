@@ -1,13 +1,16 @@
 {% extends '::base.html.twig' %}
 {% block body %}
     <table class="table">
-    {% for restaurant in restaurants %}
+    {% for botRestaurant in botRestaurants %}
         <tr>
-            <td>{{ restaurant.id }}</td>
-            <td>{{ restaurant.name }}</td>
-            <td>{{ restaurant.url }}</td>
-            <td>{{ restaurant.url2 }}</td>
+            <td>{{ botRestaurant.id }}</td>
+            <td>{{ botRestaurant.number }}</td>
+            <td>{{ botRestaurant.name }}</td>
+            <td>{{ botRestaurant.links|length }} lien(s)</td>
+            {% for link in botRestaurant.links %}
+                <td>{{ link.url }}</td>
+            {% endfor %}
         </tr>
-    {% endfor %}    
+    {% endfor %}
     </table>
 {% endblock %}

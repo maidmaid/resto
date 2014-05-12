@@ -35,6 +35,12 @@ class BotRestaurant
      */
     private $name;
 
+    /**
+     * @var \Mnu\BotBundle\Entity\BotRestaurantLink[]
+     * 
+     * @ORM\OneToMany(targetEntity="Mnu\BotBundle\Entity\BotRestaurantLink", mappedBy="botRestaurant", cascade={"persist"})
+     */
+    private $links;
 
     /**
      * Get id
@@ -90,5 +96,45 @@ class BotRestaurant
     public function getName()
     {
         return $this->name;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->links = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add links
+     *
+     * @param \Mnu\BotBundle\Entity\BotRestaurantLink $links
+     * @return BotRestaurant
+     */
+    public function addLink(\Mnu\BotBundle\Entity\BotRestaurantLink $links)
+    {
+        $this->links[] = $links;
+
+        return $this;
+    }
+
+    /**
+     * Remove links
+     *
+     * @param \Mnu\BotBundle\Entity\BotRestaurantLink $links
+     */
+    public function removeLink(\Mnu\BotBundle\Entity\BotRestaurantLink $links)
+    {
+        $this->links->removeElement($links);
+    }
+
+    /**
+     * Get links
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLinks()
+    {
+        return $this->links;
     }
 }
