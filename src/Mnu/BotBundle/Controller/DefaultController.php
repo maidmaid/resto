@@ -28,9 +28,9 @@ class DefaultController extends Controller
             );
 
             // cURL
-            $response = $this->urlExec($url, $getFields, $postFields, $httpHeader);
-            file_put_contents('debug_original.html', $response['output']);
-            //$response['output'] = file_get_contents('debug_original.html');
+            //$response = $this->urlExec($url, $getFields, $postFields, $httpHeader);
+            //file_put_contents('debug_original.html', $response['output']);
+            $response['output'] = file_get_contents('debug_original.html');
             
             // Erreurs
             $response['output'] = tidy_repair_string($response['output'], array(
@@ -54,7 +54,7 @@ class DefaultController extends Controller
                 // Phone
                 $phoneStr = str_replace(' ', '', $restaurantNode->nodeValue);
                 preg_match('/\d{10}/', $phoneStr, $phone);
-                $id = $phone[0];
+                $number = $phone[0];
                 
                 // Name
                 $name = $restaurantNode->getElementsByTagName('b')->item(0)->nodeValue;
@@ -79,7 +79,7 @@ class DefaultController extends Controller
                     $botRestaurant = $botRestaurants[0];    
                 }
                 
-                $botRestaurant->setNumber($id);
+                $botRestaurant->setNumber($number);
                 $botRestaurant->setName($name);
                 
                 $em->persist($botRestaurant);
