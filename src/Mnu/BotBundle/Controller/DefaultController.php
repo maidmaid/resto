@@ -28,9 +28,9 @@ class DefaultController extends Controller
             );
 
             // cURL
-            //$response = $this->urlExec($url, $getFields, $postFields, $httpHeader);
+            $response = $this->urlExec($url, $getFields, $postFields, $httpHeader);
             //file_put_contents('debug_original.html', $response['output']);
-            $response['output'] = file_get_contents('debug_original.html');
+            //$response['output'] = file_get_contents('debug_original.html');
             
             // Erreurs
             $response['output'] = tidy_repair_string($response['output'], array(
@@ -78,14 +78,21 @@ class DefaultController extends Controller
                 $botRestaurantLink1 = new \Mnu\BotBundle\Entity\BotRestaurantLink();
                 $botRestaurantLink1->setUrl($url);
                 $botRestaurantLink1->setBotRestaurant($botRestaurant);
-                $em->persist($botRestaurantLink1);
+                if(!$botRestaurant->linkExists($botRestaurantLink1))
+                {
+                    $em->persist($botRestaurantLink1);
+                }
                 
                 if(!empty($url2))
                 {
                     $botRestaurantLink2 = new \Mnu\BotBundle\Entity\BotRestaurantLink();
                     $botRestaurantLink2->setUrl($url2);
                     $botRestaurantLink2->setBotRestaurant($botRestaurant);
-                    $em->persist($botRestaurantLink2);
+                    
+                    if(!$botRestaurant->linkExists($botRestaurantLink2))
+                    {
+                        $em->persist($botRestaurantLink2);
+                    }
                 }
                 
                 $em->persist($botRestaurant);

@@ -137,4 +137,17 @@ class BotRestaurant
     {
         return $this->links;
     }
+    
+    public function linkExists(\Mnu\BotBundle\Entity\BotRestaurantLink $botRestaurantLink)
+    {
+        foreach ($this->links as $link)
+        {
+            if($link->getUrl() == $botRestaurantLink->getUrl())
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
