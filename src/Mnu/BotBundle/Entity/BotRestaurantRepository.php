@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class BotRestaurantRepository extends EntityRepository
 {
+    /**
+     * Retourne un bot restaurant en fonction de son numéro
+     * @param integer $number
+     * @return \Mnu\BotBundle\Entity\BotRestaurant[]
+     */
+    public function findByNumber($number)
+    {
+        return $this->findBy(array('number' => $number));
+    }
 }

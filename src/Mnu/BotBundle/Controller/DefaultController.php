@@ -56,19 +56,40 @@ class DefaultController extends Controller
                 preg_match('/\d{10}/', $phoneStr, $phone);
                 $id = $phone[0];
                 
-                $restaurant = array();
-                $restaurant['id'] = $id;
-                $restaurant['name'] = $name = $restaurantNode->getElementsByTagName('b')->item(0)->nodeValue;
-                $restaurant['url'] = $restaurantNode->getElementsByTagName('a')->item(0)->getAttribute('href');
-                $restaurant['url2'] = $restaurantNode->getElementsByTagName('a')->length == 2 ?
+                // Name
+                $name = $restaurantNode->getElementsByTagName('b')->item(0)->nodeValue;
+                
+                // Url
+                $url = $restaurantNode->getElementsByTagName('a')->item(0)->getAttribute('href');
+                $url2 = $restaurantNode->getElementsByTagName('a')->length == 2 ?
                         $restaurantNode->getElementsByTagName('a')->item(1)->getAttribute('href') :
                         '';
-                $restaurants[] = $restaurant;
+                
+                $em = $this->getDoctrine()->getManager();
+                /* @var $repository \Mnu\BotBundle\Entity\BotRestaurantRepository */
+                $repository = $em->getRepository('MnuBotBundle:BotRestaurant');
+                $botRestaurants = $repository->findByNumber($number);
+                
+                if(empty($botRestaurants))
+                {
+                    $botRestaurant = new \Mnu\BotBundle\Entity\BotRestaurant();
+                }
+                else
+                {
+                    $botRestaurant = $botRestaurants[0];    
+                }
+                
+                $botRestaurant->setNumber($id);
+                $botRestaurant->setName($name);
+                
+                $em->persist($botRestaurant);
             }
+            
+            $em->flush();
         }
         
         return $this->render('MnuBotBundle:Default:index.html.twig', array(
-            'restaurants' => $restaurants
+            'restaurants' => array()
         ));
     }
     
