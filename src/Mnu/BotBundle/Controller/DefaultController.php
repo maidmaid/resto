@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        for ($page = 1; $page <= 2; $page++)
+        for ($page = 1; $page <= 1; $page++)
         {
             $url = 'http://www.resto.ch/home/xx.php';
 
@@ -54,48 +54,52 @@ class DefaultController extends Controller
                 // Number
                 $phoneStr = str_replace(' ', '', $restaurantNode->nodeValue);
                 preg_match('/\d{10}/', $phoneStr, $phone);
+                
+                if(empty($phone))
+                {
+                    continue;
+                }
+                
                 $number = $phone[0];
                 
                 // Name
                 $name = $restaurantNode->getElementsByTagName('b')->item(0)->nodeValue;
                 
                 // Urls
-                $url = $restaurantNode->getElementsByTagName('a')->item(0)->getAttribute('href');
-                $url2 = $restaurantNode->getElementsByTagName('a')->length == 2 ?
-                        $restaurantNode->getElementsByTagName('a')->item(1)->getAttribute('href') :
-                        '';
+                $urls = array();
+                foreach($restaurantNode->getElementsByTagName('a') as $linkNode)
+                {
+                    $urls[] = $linkNode->getAttribute('href');
+                }
 
                 // Persistance
                 $em = $this->getDoctrine()->getManager();
                 /* @var $repository \Mnu\BotBundle\Entity\BotRestaurantRepository */
                 $repository = $em->getRepository('MnuBotBundle:BotRestaurant');
                 $botRestaurants = $repository->findByNumber($number);
-                $botRestaurant = empty($botRestaurants) ? new \Mnu\BotBundle\Entity\BotRestaurant() : $botRestaurants[0];
+                
+                if(empty($botRestaurants))
+                {
+                    $botRestaurant = new \Mnu\BotBundle\Entity\BotRestaurant();
+                }
+                else
+                {
+                    $botRestaurant = $botRestaurants[0];
+                }
                 
                 $botRestaurant->setNumber($number);
                 $botRestaurant->setName($name);
                 
-                $botRestaurantLink1 = new \Mnu\BotBundle\Entity\BotRestaurantLink();
-                $botRestaurantLink1->setUrl($url);
-                $botRestaurantLink1->setBotRestaurant($botRestaurant);
-                if(!$botRestaurant->linkExists($botRestaurantLink1))
+                foreach($urls as $url)
                 {
-                    $em->persist($botRestaurantLink1);
-                }
-                
-                if(!empty($url2))
-                {
-                    $botRestaurantLink2 = new \Mnu\BotBundle\Entity\BotRestaurantLink();
-                    $botRestaurantLink2->setUrl($url2);
-                    $botRestaurantLink2->setBotRestaurant($botRestaurant);
-                    
-                    if(!$botRestaurant->linkExists($botRestaurantLink2))
+                    if(!$botRestaurant->linkExists($url))
                     {
-                        $em->persist($botRestaurantLink2);
+                        $link = new \Mnu\BotBundle\Entity\BotRestaurantLink();
+                        $link->setUrl($url);
+                        $botRestaurant->addLink($link);
+                        $em->persist($botRestaurant);
                     }
                 }
-                
-                $em->persist($botRestaurant);
             }
             
             $em->flush();

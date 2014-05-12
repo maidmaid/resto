@@ -31,7 +31,7 @@ class BotRestaurantLink
     /**
      * @var \Mnu\BotBundle\Entity\BotRestaurant
      * 
-     * @ORM\ManyToOne(targetEntity="Mnu\BotBundle\Entity\BotRestaurant", inversedBy="links", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Mnu\BotBundle\Entity\BotRestaurant", inversedBy="links")
      */
     private $botRestaurant;
 

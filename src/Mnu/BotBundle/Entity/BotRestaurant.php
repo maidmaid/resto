@@ -138,11 +138,11 @@ class BotRestaurant
         return $this->links;
     }
     
-    public function linkExists(\Mnu\BotBundle\Entity\BotRestaurantLink $botRestaurantLink)
+    public function linkExists($url)
     {
         foreach ($this->links as $link)
         {
-            if($link->getUrl() == $botRestaurantLink->getUrl())
+            if($link->getUrl() == $url)
             {
                 return true;
             }
