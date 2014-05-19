@@ -7,9 +7,11 @@
             <td>{{ botRestaurant.number }}</td>
             <td>{{ botRestaurant.name }}</td>
             <td>{{ botRestaurant.links|length }} lien(s)</td>
+            <td>
             {% for link in botRestaurant.links %}
-                <td>{{ link.url }}</td>
+                <p><a href="{{ link.url }}">{{ link.url }}</a></p>
             {% endfor %}
+            <td>
         </tr>
     {% endfor %}
     </table>
